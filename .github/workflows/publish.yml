@@ -1,16 +1,34 @@
-name: Deploy Angular Application
+
+name: Workflow Angular Example Application
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
-      - run: npm install
-      - run: npm install -g @angular/cli@latest
-      - run: ng build
+      - name: Code checkout
+        uses: actions/checkout@v3
+
+      - name: Configure Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install dependencias
+        run: npm install
+
+      - name: Ejecutar pruebas
+        run: npm test
+
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli@latest
+
+      - name: Build Angular application
+        run: ng build
