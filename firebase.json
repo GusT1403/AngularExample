@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "diplomado-mod5-qa",
     "public": "dist/project/browser",
     "ignore": [
       "firebase.json",
